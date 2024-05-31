@@ -29,9 +29,13 @@
   )
 }
 
-#let build_closing_content(personal_infos, signature_img_path, closing) = {
+#let build_closing_content(personal_infos, signature_img_path, closing, force_closing_bottom) = {
+  let closing_aligment = left
+  if force_closing_bottom {
+    closing_aligment = closing_aligment + bottom
+  }
   align(
-    bottom + left,
+    closing_aligment,
     box(
       width: 5cm,
       stack(
@@ -58,7 +62,8 @@
   opening,
   closing,
   body,
-  font: "Noto Sans"
+  font: "Noto Sans",
+  force_closing_bottom: true
 ) = {
   set text(font: font)
 
@@ -79,6 +84,6 @@
   
   body
 
-  build_closing_content(personal_infos, signature_img_path, closing)
+  build_closing_content(personal_infos, signature_img_path, closing, force_closing_bottom)
 
 }
