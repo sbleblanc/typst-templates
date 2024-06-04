@@ -65,6 +65,7 @@
   font: "Noto Sans",
   force_closing_bottom: true
 ) = {
+  set page(margin: 2.4cm)
   set text(font: font)
 
   build_personal_infos_content(personal_infos)
