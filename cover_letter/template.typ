@@ -13,7 +13,7 @@
   ]
 }
 
-#let build_letter_header_content(company_infos) = {
+#let build_letter_header_content(company_infos, display_address) = {
   let company_content = [
     *#company_infos.name*\ 
     #company_infos.street_no #company_infos.street\ 
@@ -24,7 +24,9 @@
   grid(
     columns: (1fr, 1fr),
     align: (left + top, top + right),
-    company_content,
+    if display_address {
+      company_content
+    } else [],
     datetime.today().display("[month repr:long] [day], [year]")
   )
 }
@@ -63,7 +65,8 @@
   closing,
   body,
   font: "Noto Sans",
-  force_closing_bottom: true
+  force_closing_bottom: true,
+  display_address: true
 ) = {
   // set page(margin: 2.4cm)
   set text(font: font)
@@ -72,7 +75,7 @@
 
   block(
     above: 1.5em,
-    build_letter_header_content(company_infos)
+    build_letter_header_content(company_infos, display_address)
   )
 
   set par(justify: true)
